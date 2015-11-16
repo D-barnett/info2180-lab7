@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <script src="//ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js"></script>
+       <script>
+           window.onload = function() {
+             document.getElementById("search").addEventListener(
+                             "click", function(){
+                // go out and get result from request.php
+                var word = document.getElementById("browse").value;
+                if (word=="bar"){
+                 new Ajax.Request("https://lab7-info2180-d-barnett.c9users.io/request.php?q=bar",
+                       {
+                          method: "get",
+                          onSuccess: doSomethingWithTheResult
+                         });}
+                if(word=="definition"){
+                    new Ajax.Request("https://lab7-info2180-d-barnett.c9users.io/request.php?q=definition",
+                       {
+                          method: "get",
+                          onSuccess: doSomethingWithTheResult
+                         });
+                }
+                if(word=="ajax"){
+                   new Ajax.Request("https://lab7-info2180-d-barnett.c9users.io/request.php?q=ajax",
+                       {
+                          method: "get",
+                          onSuccess: doSomethingWithTheResult
+                         });  
+                }
+                  
+           });
+           function doSomethingWithTheResult(data) {
+                         var wordsearch = document.getElementById("result");
+                         wordsearch.innerHTML += (data.responseText);
+                         //console.log(data.responseText);
+                         //new Ajax.Updater("result", "https://lab7-info2180-d-barnett.c9users.io/request.php", {
+                             //method: 'get'
+                         console.log(data.responseText);
+                        }
+                        
+            };                        
+       </script>
+        <title>Ajax Demo of Search Button</title>
+    </head>
+    <body>
+          <div id="controls">
+             Term: <input type="text" id="term" />
+             <button id="search">Lookup</button>
+          </div>
+          <div id="result">
+              
+          </div>
+    </body>
+</html
